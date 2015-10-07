@@ -1,19 +1,28 @@
 from sense_hat import SenseHat
+from app.pixels import GeneratePixels
+from app.fetch import FetchCitiBikeData, ExtractStationData
 
-sense = SenseHat()
+def Main():
+  '''Wrapper.'''
 
-X = [255, 0, 0]  # Red
-O = [255, 255, 255]  # White
+  #
+  # Collect data.
+  #
+  data = FetchCitiBikeData()
+  station = ExtractStationData(data=data,id=445)
 
-question_mark = [
-O, O, O, X, X, O, O, O,
-O, O, X, O, O, X, O, O,
-O, O, O, O, O, X, O, O,
-O, O, O, O, X, O, O, O,
-O, O, O, X, O, O, O, O,
-O, O, O, X, O, O, O, O,
-O, O, O, O, O, O, O, O,
-O, O, O, X, O, O, O, O
-]
+  #
+  # Generate pixels.
+  #
+  pixels = GeneratePixels(station['data']['availableBikes'])
 
-sense.set_pixels(question_mark)
+  #
+  # Send to SenseHAT.
+  #
+  sense = SenseHat()
+  sense.set_pixels(pixels)
+
+#
+# Starting schedule.
+#
+schedule.every(1).minute.do(Main)
