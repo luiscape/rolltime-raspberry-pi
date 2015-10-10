@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 def GeneratePixels(n):
   '''Generates pixels for the SenseHat.'''
 
