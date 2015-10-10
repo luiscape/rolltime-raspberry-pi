@@ -1,5 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import time
+import schedule
+
 from sense_hat import SenseHat
 from app.pixels import GeneratePixels
+from app.utilities.format import item
 from app.fetch import FetchCitiBikeData, ExtractStationData
 
 def Main():
